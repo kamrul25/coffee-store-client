@@ -1,9 +1,10 @@
+import Swal from 'sweetalert2'
+
 const AddCoffee = () => {
 
     const handleAddCoffee = event =>{
         event.preventDefault();
 
-        
         const form = event.target;
         const name = form.name.value;
         const quantity = form.quantity.value;
@@ -26,11 +27,19 @@ const AddCoffee = () => {
         .then(res => res.json())
         .then(data =>{
             console.log(data)
+            if(data.insertedId){
+                Swal.fire({
+                    title: 'Success!',
+                    text: 'Coffee added successfully',
+                    icon: 'success',
+                    confirmButtonText: 'Cool'
+                  })
+            }
         })
 
     }
   return (
-    <div className="md:w-1/2 mx-auto mt-12 border border-green-400 p-2 ">
+    <div className="md:w-1/2 mx-auto mt-12 border border-green-400 p-2 bg-[#F4F3F0]">
       <h1 className=" text-2xl font-medium  md:text-6xl text-center md:font-extrabold m-4">Add a Coffee</h1>
       <form onSubmit={handleAddCoffee}>
          {/* form name and quantity row */}
